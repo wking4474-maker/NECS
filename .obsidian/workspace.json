@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "54c8bc40542fd1eb",
+        "id": "1e35875a32565853",
         "type": "tabs",
         "children": [
           {
-            "id": "810902308486209b",
+            "id": "f57ab5340f68bbbb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -182,13 +182,13 @@
   },
   "active": "296625c60d8a9c93",
   "lastOpenFiles": [
+    "01.中职/02.Server/01.Linux/kubernetes/kubernetes_mul_master.md",
+    "01.中职/02.Server/01.Linux/kubernetes/kubernetes(iscsi磁盘).md",
+    "01.中职/02.Server/01.Linux/kubernetes/kubernetes.md",
+    "01.中职/02.Server/01.Linux/kubernetes/k8sinit.md",
     "01.中职/01.Network/组播配置/VLC/vlc.md",
     "01.中职/01.Network/组播配置/AC_multicast/configuation.md",
     "01.中职/02.Server/01.Linux/podman/podman.md",
-    "01.中职/02.Server/01.Linux/kubernetes/kubernetes.md",
-    "01.中职/02.Server/01.Linux/kubernetes/kubernetes_mul_master.md",
-    "01.中职/02.Server/01.Linux/kubernetes/k8sinit.md",
-    "01.中职/02.Server/01.Linux/kubernetes/kubernetes(iscsi磁盘).md",
     "01.中职/02.Server/02.Windows/gpo/GPO.md",
     "01.中职/02.Server/02.Windows/windows域迁移/pics/p2.png",
     "01.中职/02.Server/02.Windows/windows域迁移/pics/p1.png",

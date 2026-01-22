@@ -1,9 +1,8 @@
 ## 多组多从kubernetes配置:
 
-- 基本配置需要和一组多从类似:
+- 基本配置需要和一组多从类似
 
 - 主节点创建指令:
-
 ```shell
 kubeadm init --apiserver-advertise-address=192.168.108.51 --kubernetes-version=v1.30.7 --service-cidr=10.96.0.0/12 --pod-network-cidr=10.244.0.0/16 --cri-socket=/run/containerd/containerd.sock --upload-certs --control-plane-endpoint=192.168.108.51:6443
 
@@ -39,8 +38,9 @@ kubeadm join 192.168.186.50:16443 --token abcdef.0123456789abcdef \
 --discovery-token-ca-cert-hash sha256:74dc5e7f26f041e65ddc085b8eb9d05233a9394e50a8c19374f9bf5e198a3e5e
 ```
 
-- `kubeadm join 192.168.186.50:16443 --token abcdef.0123456789abcdef \
+- 下面这段指令用于添加其他的控制节点
+```shell
+kubeadm join 192.168.186.50:16443 --token abcdef.0123456789abcdef \
 --discovery-token-ca-cert-hash sha256:74dc5e7f26f041e65ddc085b8eb9d05233a9394e50a8c19374f9bf5e198a3e5e \
---control-plane --certificate-key fbe0f58aeb0d2e0640f4ddcfcda3afb56ee04ea9a90dab22502511a315843509`
-
-- 上面这段指令用于添加其他的控制节点
+--control-plane --certificate-key fbe0f58aeb0d2e0640f4ddcfcda3afb56ee04ea9a90dab22502511a315843509
+```
