@@ -1,0 +1,274 @@
+SW-3(config)#show run
+!!
+switch convert mode vsf
+vsf member 1
+vsf priority 2
+!!
+!
+no service password-encryption
+!
+hostname SW-3
+sysLocation China
+sysContact 400-810-9119
+!
+authentication logging enable
+!
+username admin privilege 15 password 0 admin
+!
+!
+mac-address-learning cpu-control
+!
+!
+!
+info-center logfile 4 config count 40960 nandflash logfile.log member 1
+info-center logfile 4 output-enable member 1
+info-center logfile 4 match level warnings  member 1
+snmp-server enable
+snmp-server trap-source 10.50.255.9
+snmp-server trap-source 2001:10:50:255::9
+snmp-server engineid 62003
+snmp-server user DCN2021 DCN authPriv 3des ffe9d19839db9f24f41cff450672e999 auth sha ffe9d19839db9f24f41cff450671
+snmp-server group DCN authpriv read Dcn2021_R write Dcn2021_W
+snmp-server host 2001:10:50:15::120 v3 authpriv DCN2021
+snmp-server host 10.50.15.120 v3 authpriv DCN2021
+!
+!
+!
+!
+cpu-protect enable
+cpu-protect log enable
+cpu-protect interval 10
+cpu-protect recovery-time 120
+cpu-protect per-ip limit-speed 200
+cpu-protect per-mac limit-speed 200
+!
+lldp enable
+lldp msgTxHold 5
+lldp tx-interval 60
+lldp notification interval 60
+!         
+!
+!
+Interface Ethernet0
+!
+!
+!
+cpu-rx-ratelimit total 600
+!
+vlan 1;10;20;30;50;1000-1001;4000 
+!
+load-balance dst-src-ip
+!
+Interface Ethernet1/0/1
+ loopback
+ switchport access vlan 10
+!
+Interface Ethernet1/0/2
+ switchport access vlan 10
+!
+Interface Ethernet1/0/3
+ loopback
+ switchport access vlan 20
+!
+Interface Ethernet1/0/4
+ switchport access vlan 20
+!
+Interface Ethernet1/0/5
+ loopback
+ switchport access vlan 30
+!
+Interface Ethernet1/0/6
+ switchport access vlan 30
+!
+Interface Ethernet1/0/7
+!
+Interface Ethernet1/0/8
+!
+Interface Ethernet1/0/9
+ loopback
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security aging type inactivity
+!
+Interface Ethernet1/0/10
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security aging type inactivity
+!         
+Interface Ethernet1/0/11
+!
+Interface Ethernet1/0/12
+!
+Interface Ethernet1/0/13
+!
+Interface Ethernet1/0/14
+!
+Interface Ethernet1/0/15
+!
+Interface Ethernet1/0/16
+!
+Interface Ethernet1/0/17
+!
+Interface Ethernet1/0/18
+ switchport access vlan 4000
+!
+Interface Ethernet1/0/19
+!
+Interface Ethernet1/0/20
+!
+Interface Ethernet1/0/21
+!
+Interface Ethernet1/0/22
+ switchport access vlan 1000
+!
+Interface Ethernet1/0/23
+ switchport access vlan 1001
+!
+Interface Ethernet1/0/24
+!
+Interface Ethernet1/0/25
+!
+Interface Ethernet1/0/26
+!
+Interface Ethernet1/0/27
+!
+Interface Ethernet1/0/28
+!
+ip vrf Internet
+!
+interface Vlan10
+ ip address 10.50.31.254 255.255.255.0
+!
+interface Vlan20
+ ipv6 address 2001:10:50:32::254/64
+ ip address 10.50.32.254 255.255.255.0
+!         
+interface Vlan30
+ ipv6 address 2001:10:50:33::254/64
+ ip address 10.50.33.254 255.255.255.0
+!
+interface Vlan50
+ ipv6 address 2001:10:50:35::254/64
+ ip address 10.50.35.254 255.255.255.0
+!
+interface Vlan1000
+ ipv6 address 2001:10:50:254::2/127
+ ip ospf cost 100
+ ip ospf hello-interval 5
+ ip ospf dead-interval 15
+ ipv6 router ospf area 0 tag 1
+ ip address 10.50.254.5 255.255.255.252
+!
+interface Vlan1001
+ ipv6 address 2001:10:50:254::4/127
+ ip ospf hello-interval 5
+ ip ospf dead-interval 15
+ ipv6 ospf cost 100
+ ipv6 router ospf area 0 tag 1
+ ip address 10.50.254.9 255.255.255.252
+!         
+interface Vlan4000
+ ip vrf forwarding Internet
+ ip address 202.50.100.2 255.255.255.252
+!
+interface Loopback1
+ ip address 10.50.255.8 255.255.255.255
+!
+interface Loopback100
+ ip vrf forwarding Internet
+ ip address 202.50.100.100 255.255.255.255
+!
+interface Loopback2
+ ipv6 address 2001:10:50:255::9/128
+ ipv6 router ospf area 0 tag 1
+ ip address 10.50.255.9 255.255.255.255
+!
+router ospf 1
+ network 10.50.31.0 0.0.0.255 area 0
+ network 10.50.254.4 0.0.0.3 area 0
+ network 10.50.254.8 0.0.0.3 area 0
+ network 10.50.255.8 0.0.0.0 area 0
+!
+router ipv6 ospf 1
+ router-id 10.50.255.9
+!
+router bgp 62022
+ bgp dampening
+ network 10.50.32.0/24
+ network 10.50.33.0/24
+ network 10.50.35.0/24
+ neighbor 10.50.254.6 remote-as 62021
+ neighbor 10.50.254.6 ebgp-multihop 255
+ neighbor 10.50.254.6 next-hop-self
+ neighbor 10.50.254.6 route-map fw in
+ neighbor 10.50.254.6 route-map fw2 out
+ neighbor 10.50.254.10 remote-as 62021
+ neighbor 10.50.254.10 ebgp-multihop 255
+ neighbor 10.50.254.10 next-hop-self
+ neighbor 10.50.254.10 route-map cp in
+ neighbor 10.50.254.10 route-map cp2 out
+ neighbor 2001:10:50:255::2 remote-as 62021
+ neighbor 2001:10:50:255::2 ebgp-multihop 255
+ neighbor 2001:10:50:255::2 update-source 2001:10:50:255::9
+ no neighbor 2001:10:50:255::2 activate
+ neighbor 2001:10:50:255::4 remote-as 62021
+ neighbor 2001:10:50:255::4 ebgp-multihop 255
+ neighbor 2001:10:50:255::4 update-source 2001:10:50:255::9
+ no neighbor 2001:10:50:255::4 activate
+ address-family ipv6 unicast
+ network 2001:10:50:32::/64
+ network 2001:10:50:33::/64
+ network 2001:10:50:35::/64
+ neighbor 2001:10:50:255::2 activate
+ neighbor 2001:10:50:255::2 next-hop-self
+ neighbor 2001:10:50:255::4 activate
+ neighbor 2001:10:50:255::4 next-hop-self
+ exit-address-family
+!
+ip route vrf Internet 202.50.21.0/28 202.50.100.1
+ip route vrf Internet 202.50.100.4/30 202.50.100.1
+!
+ip prefix-list cp seq 5 permit 10.50.12.0/24
+ip prefix-list cp seq 10 permit 10.50.22.0/24
+ip prefix-list cp2 seq 5 permit 10.50.32.0/24
+ip prefix-list fw seq 5 permit 10.50.13.0/24
+ip prefix-list fw seq 10 permit 10.50.23.0/24
+ip prefix-list fw seq 15 permit 10.50.15.0/24
+ip prefix-list fw seq 20 permit 10.50.25.0/24
+ip prefix-list fw2 seq 5 permit 10.50.33.0/24
+ip prefix-list fw2 seq 10 permit 10.50.35.0/24
+!
+route-map cp permit 10
+ match ip address prefix-list cp
+ set as-path prepend 62000
+!
+route-map cp permit 20
+!
+route-map cp2 permit 10
+ match ip address prefix-list cp2
+ set as-path prepend 62000
+!
+route-map cp2 permit 20
+!
+route-map fw permit 10
+ match ip address prefix-list fw
+ set as-path prepend 62000
+!
+route-map fw permit 20
+!
+route-map fw2 permit 10
+ match ip address prefix-list fw2
+ set as-path prepend 62000
+!
+route-map fw2 permit 20
+!
+!         
+no login
+!
+isolate-port apply l2
+isolate-port group fw switchport interface Ethernet1/0/6
+isolate-port group fw switchport interface Ethernet1/0/5
+captive-portal
+!
+end
+

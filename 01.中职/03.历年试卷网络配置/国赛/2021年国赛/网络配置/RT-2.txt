@@ -1,0 +1,117 @@
+RT-2#show run
+Building configuration...
+
+Current configuration:
+!
+hostname RT-2
+!
+!
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+isdn switch-type basic-5ess
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+interface GigaEthernet0/0
+ no ip address
+!
+interface GigaEthernet0/0.100
+ ip address 172.16.100.254 255.255.255.0
+ encapsulation dot1Q 100
+ bandwidth 1000000
+ delay 1
+!
+interface GigaEthernet0/0.200
+ ip address 172.16.200.254 255.255.255.0
+ encapsulation dot1Q 200
+ bandwidth 1000000
+ delay 1
+ ipv6 enable
+ ipv6 address 2001:172:16:200::254/64
+!
+interface GigaEthernet0/1
+ no ip address
+!         
+interface GigaEthernet0/2
+ no ip address
+!
+interface GigaEthernet0/3
+ no ip address
+!
+interface Serial1/0
+ ip address 10.50.254.34 255.255.255.252
+ encapsulation ppp
+ physical-layer speed 2048000
+ ipv6 enable
+ ipv6 address 2001:10:50:254::B/127
+!
+interface Serial1/1
+ physical-layer mode async
+ ip address 10.50.254.30 255.255.255.252
+ ipv6 enable
+ ipv6 address 2001:10:50:254::9/127
+ ip pim-dm
+ ip igmp version 2
+!
+!
+!         
+!
+!
+!
+!
+!
+router bgp 62023
+ no synchronization
+ bgp log-neighbor-changes
+ bgp dampening
+ network 172.16.200.0/24
+ neighbor 10.50.254.29 remote-as 62021 
+ neighbor 10.50.254.29 ebgp-multihop 255
+ neighbor 10.50.254.33 remote-as 62021 
+ neighbor 10.50.254.33 ebgp-multihop 255
+ neighbor 2001:10:50:254::8 remote-as 62021 
+ neighbor 2001:10:50:254::8 ebgp-multihop 255
+ no neighbor 2001:10:50:254::8 activate
+ neighbor 2001:10:50:254::a remote-as 62021 
+ neighbor 2001:10:50:254::a ebgp-multihop 255
+ no neighbor 2001:10:50:254::a activate
+ 
+ address-family ipv6
+ no synchronization
+ neighbor 2001:10:50:254::8 activate
+ neighbor 2001:10:50:254::8 next-hop-self
+ neighbor 2001:10:50:254::a activate
+ neighbor 2001:10:50:254::a next-hop-self
+ exit-address-family
+!
+!
+ 
+!
+!
+!
+!
+!
+!
+!
+!
+ip multicast-routing
+!
+

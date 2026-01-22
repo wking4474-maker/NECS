@@ -1,0 +1,207 @@
+hostname RT-1
+!
+!
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+isdn switch-type basic-5ess
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+interface Loopback1
+ ip address 10.50.255.6 255.255.255.255
+ ipv6 enable
+ ipv6 address 2001:10:50:255::6/128
+ ipv6 ospf 1 area 0 
+!
+interface Loopback2
+ ip address 10.50.255.7 255.255.255.255
+!
+interface GigaEthernet0/0
+ ip address 10.50.254.18 255.255.255.252
+ ip ospf cost 100
+ ip ospf hello-interval 5
+ ip ospf dead-interval 15
+!
+interface GigaEthernet0/1
+ ip address 10.50.254.21 255.255.255.252
+ ipv6 enable
+ ipv6 address 2001:10:50:254::6/127
+ ip ospf hello-interval 5
+ ip ospf dead-interval 15
+ ip pim-dm
+ ip igmp version 2
+ ipv6 ospf 1 area 0 
+!
+interface GigaEthernet0/2
+ ip address 10.50.254.25 255.255.255.252
+!
+interface GigaEthernet0/3
+ no ip address
+!
+interface Serial1/0
+ physical-layer mode async
+ ip address 10.50.254.29 255.255.255.252
+ ipv6 enable
+ ipv6 address 2001:10:50:254::8/127
+ ip pim-dm
+ ip igmp version 2
+!
+interface Serial1/1
+ ip address 10.50.254.33 255.255.255.252
+ encapsulation ppp
+ physical-layer speed 2048000
+ ipv6 enable
+ ipv6 address 2001:10:50:254::A/127
+!
+!
+!
+!
+!
+!
+router ospf 1
+ network 10.50.254.20 255.255.255.252 area 0
+ network 10.50.254.16 255.255.255.252 area 0
+ network 10.50.255.6 255.255.255.255 area 0
+ redistribute ospf 2 metric-type 1 route-map lyl1
+ redistribute connect metric-type 1 route-map lyl2
+
+router ospf 2
+ network 10.50.254.24 255.255.255.252 area 20
+ network 10.50.255.7 255.255.255.255 area 20
+ default-information originate always
+ redistribute ospf 1 route-map lyl3
+ redistribute connect route-map lyl3
+
+!         
+!
+!
+router bgp 62021
+ no synchronization
+ bgp log-neighbor-changes
+ bgp dampening
+ network 172.16.20.0/24
+ neighbor 10.50.254.30 remote-as 62023 
+ neighbor 10.50.254.30 ebgp-multihop 255
+ neighbor 10.50.254.30 default-originate
+ neighbor 10.50.254.34 remote-as 62023 
+ neighbor 10.50.254.34 ebgp-multihop 255
+ neighbor 10.50.254.34 default-originate
+ neighbor 10.50.255.1 remote-as 62021 
+ neighbor 10.50.255.1 update-source Loopback1
+ neighbor 10.50.255.1 next-hop-self
+ neighbor 10.50.255.3 remote-as 62021 
+ neighbor 10.50.255.3 update-source Loopback1
+ neighbor 10.50.255.3 next-hop-self
+ neighbor 2001:10:50:254::9 remote-as 62023 
+ neighbor 2001:10:50:254::9 ebgp-multihop 255
+ no neighbor 2001:10:50:254::9 activate
+ neighbor 2001:10:50:254::b remote-as 62023 
+ neighbor 2001:10:50:254::b ebgp-multihop 255
+ no neighbor 2001:10:50:254::b activate
+ neighbor 2001:10:50:255::2 remote-as 62021 
+ neighbor 2001:10:50:255::2 update-source Loopback1
+ no neighbor 2001:10:50:255::2 activate
+ neighbor 2001:10:50:255::4 remote-as 62021 
+ neighbor 2001:10:50:255::4 update-source Loopback1
+ no neighbor 2001:10:50:255::4 activate
+ 
+ address-family ipv6
+ no synchronization
+ neighbor 2001:10:50:254::9 activate
+ neighbor 2001:10:50:254::9 next-hop-self
+ neighbor 2001:10:50:254::b activate
+ neighbor 2001:10:50:254::b next-hop-self
+ neighbor 2001:10:50:255::2 activate
+ neighbor 2001:10:50:255::2 next-hop-self
+ neighbor 2001:10:50:255::4 activate
+ neighbor 2001:10:50:255::4 next-hop-self
+ exit-address-family
+!
+!
+          
+!
+!
+!
+!
+!
+!
+!
+!
+ip multicast-routing
+!
+router ospfv3 1
+ router-id 10.50.255.6
+
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+ip access-list standard acl1
+ permit 10.50.255.10 255.255.255.255 sequence 10
+ permit 172.16.10.254 255.255.255.0 sequence 20
+!
+ip access-list standard acl2
+ permit 10.50.254.24 255.255.255.252 sequence 10
+!
+ip access-list standard acl3
+ permit 10.50.255.1 255.255.255.255 sequence 10
+ permit 10.50.255.3 255.255.255.255 sequence 20
+ permit 10.50.255.5 255.255.255.255 sequence 30
+ permit 10.50.255.6 255.255.255.255 sequence 40
+ permit 10.50.255.7 255.255.255.255 sequence 50
+ permit 10.50.255.8 255.255.255.255 sequence 60
+!
+!
+route-map lyl1 10 permit
+ match ip address acl1
+!         
+route-map lyl3 10 permit
+ match ip address acl3
+!
+route-map lyl2 10 permit
+ match ip address acl2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+

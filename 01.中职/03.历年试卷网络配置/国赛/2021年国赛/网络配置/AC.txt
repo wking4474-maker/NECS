@@ -1,0 +1,190 @@
+AC#show run
+!
+no service password-encryption
+!
+hostname AC
+sysLocation China
+sysContact 400-810-9119
+!
+username admin privilege 15 password 0 admin
+!
+authentication line console login local
+!
+!
+!
+no logging flash
+!
+service dhcp
+!
+ip forward-protocol udp bootps
+!
+ip dhcp pool vlan100
+ network-address 172.16.100.0 255.255.255.0
+ default-router 172.16.100.254
+!
+ip dhcp pool vlan200
+ network-address 172.16.200.0 255.255.255.0
+ default-router 172.16.200.254
+!
+!
+!
+!
+!
+!
+!
+!
+vlan 1;100;110;120;200;1000;2000 
+!
+Interface Ethernet1/0/1
+ switchport access vlan 2000
+!
+Interface Ethernet1/0/2
+ switchport access vlan 110
+!
+Interface Ethernet1/0/3
+ switchport access vlan 1000
+!
+Interface Ethernet1/0/4
+ switchport mode trunk
+!         
+Interface Ethernet1/0/5
+ switchport mode trunk
+!
+Interface Ethernet1/0/6
+!
+Interface Ethernet1/0/7
+!
+Interface Ethernet1/0/8
+!
+Interface Ethernet1/0/9
+!
+Interface Ethernet1/0/10
+ switchport mode trunk
+ switchport trunk allowed vlan 100;200 
+ switchport trunk native vlan 100
+!
+Interface Ethernet1/0/11
+!
+Interface Ethernet1/0/12
+!
+Interface Ethernet1/0/13
+!
+Interface Ethernet1/0/14
+!         
+Interface Ethernet1/0/15
+!
+Interface Ethernet1/0/16
+!
+Interface Ethernet1/0/17
+!
+Interface Ethernet1/0/18
+!
+Interface Ethernet1/0/19
+!
+Interface Ethernet1/0/20
+!
+Interface Ethernet1/0/21
+ switchport access vlan 200
+!
+Interface Ethernet1/0/22
+!
+Interface Ethernet1/0/23
+!
+Interface Ethernet1/0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 100;200 
+!
+Interface Ethernet1/0/25
+!
+Interface Ethernet1/0/26
+!
+Interface Ethernet1/0/27
+!
+Interface Ethernet1/0/28
+!
+interface Vlan100
+ ip address 172.16.100.1 255.255.255.0
+!
+interface Vlan110
+ ip address 10.10.110.1 255.255.255.0
+!
+interface Vlan120
+ ip address 10.10.120.1 255.255.255.0
+!
+interface Vlan200
+ ip address 172.16.200.1 255.255.255.0
+!
+interface Vlan1000
+ ip address 192.168.2.1 255.255.255.0
+!
+interface Vlan2000
+ ip address 192.168.100.1 255.255.255.0
+!
+!
+no login
+wireless
+ no auto-ip-assign
+ enable
+ discovery vlan-list 100
+ static-ip  172.16.100.1
+ network 1
+  arp-suppression
+  security mode wpa-personal
+  ssid DCN2021
+  vlan 200
+  wpa key encrypted a35356f0ee7d7fc5ec3c9a987f9133efdbb29990a9f7349c6d4bd20d1dbb5787d76fb82b2f8bd953baa0a5a86caae2257226ef
+  time-limit from 00:00 to 04:00 weekday all 
+!
+ network 2
+!
+ network 3
+!
+ network 4
+!
+ network 5
+!         
+ network 6
+!
+ network 7
+!
+ network 8
+!
+ network 9
+!
+ network 10
+!
+ network 11
+!
+ network 12
+!
+ network 13
+!
+ network 14
+!
+ network 15
+!
+ network 16
+!
+ ap load-balance template 1
+!         
+ ap profile 1
+  name Default
+  radio 1
+   dot11n channel-bandwidth 20
+   vap 0
+!
+!
+  radio 2
+   dot11n channel-bandwidth 40
+   vap 0
+!
+!
+!
+ ap database 00-03-0f-e8-1c-20
+!
+!
+captive-portal
+!
+end
+
+

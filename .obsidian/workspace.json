@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "1e35875a32565853",
+        "id": "3e224989d23c11a5",
         "type": "tabs",
         "children": [
           {
-            "id": "f57ab5340f68bbbb",
+            "id": "4d4a641987e368cc",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -182,6 +182,17 @@
   },
   "active": "296625c60d8a9c93",
   "lastOpenFiles": [
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-3.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-2.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-1.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/RT-2.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/RT-1.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/FW-2.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/FW-1.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/AC.txt",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/untitled folder",
+    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/2021年国赛正赛报告单/Server/Scripts-Win/Windows-7.ps1",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes_mul_master.md",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes(iscsi磁盘).md",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes.md",
@@ -193,17 +204,7 @@
     "01.中职/02.Server/02.Windows/windows域迁移/pics/p2.png",
     "01.中职/02.Server/02.Windows/windows域迁移/pics/p1.png",
     "01.中职/02.Server/02.Windows/windows域迁移/windows域迁移.md",
-    "01.中职/02.Server/02.Windows/windows域迁移/pics",
-    "01.中职/02.Server/02.Windows/windows域迁移",
     "01.中职/02.Server/01.Linux/docker/Docker.md",
-    "01.中职/02.Server/01.Linux/docker",
-    "01.中职/02.Server/02.Windows/docker/docker基本操作.pdf",
-    "01.中职/02.Server/02.Windows/docker/Note Apr 1, 2021 12_35_05 PM.pdf",
-    "01.中职/02.Server/02.Windows/docker/2020年国赛题/03.将容器文件挂载到本地.pdf",
-    "01.中职/02.Server/02.Windows/docker/2020年国赛题/3.将容器文件挂载到本地.pdf",
-    "01.中职/02.Server/02.Windows/docker/2020年国赛题/02.创建网络.pdf",
-    "01.中职/02.Server/02.Windows/docker/2020年国赛题/2.创建网络.pdf",
-    "01.中职/02.Server/02.Windows/docker/2020年国赛题/01.安装和导入.pdf",
     "02.高职/02.Server/02.Windows/windows.md",
     "02.高职/02.Server/01.Linux/docker/docker1/docker1.md",
     "01.中职/02.Server/01.Linux/containerd/containerd.md",
@@ -218,7 +219,6 @@
     "01.中职/02.Server/01.Linux/aggNic/team.md",
     "01.中职/03.历年试卷网络配置/省赛/2023年/2023_江苏省赛问题分析/问题解析.md",
     "中职/03.历年试卷网络配置/省赛/2023年省赛/2023_江苏省赛问题分析/问题解析.md",
-    "中职/03.历年试卷网络配置/2023年省赛/2023_江苏省赛问题分析/问题解析.md",
-    "README.md"
+    "中职/03.历年试卷网络配置/2023年省赛/2023_江苏省赛问题分析/问题解析.md"
   ]
 }

@@ -1,0 +1,329 @@
+
+Building configuration.
+Running configuration:
+PREVIOUS CONFIGERATION START
+END OF PREVIOUS CONFIGERATION
+
+!
+Version 5.5R8
+subVersion 2.0
+
+ip vrouter "mgt-vr"
+exit
+ip vrouter "trust-vr"
+exit
+vswitch "vswitch1"
+exit
+zone "mgt"
+exit
+zone "trust"
+exit
+zone "untrust"
+exit
+zone "dmz"
+exit
+zone "l2-trust" l2
+exit
+zone "l2-untrust" l2
+exit      
+zone "l2-dmz" l2
+exit
+zone "VPNHub"
+exit
+zone "HA"
+exit
+interface vswitchif1
+exit
+interface ethernet0/0
+exit
+interface ethernet0/1
+exit
+interface ethernet0/2
+exit
+interface ethernet0/3
+exit
+interface ethernet0/4
+exit
+interface ethernet0/5
+exit
+interface ethernet0/6
+exit
+interface ethernet0/7
+exit      
+interface ethernet0/8
+exit
+interface loopback1
+exit
+interface tunnel1
+exit
+address "Any" predefined
+exit
+address "IPv6-any" ipv6 predefined
+exit
+address "private_network" predefined
+exit
+aaa-server "local" type local
+exit
+scvpn-update-url localhost
+logging nat content hostname
+contentfilter-profile "no-contentfilter"
+exit
+behavior-profile "no-behavior"
+exit
+url-profile "no-url" global-predefined
+exit
+webpost-profile "no-webpost"
+exit      
+mail-profile "no-mail"
+exit
+dlp-profile "no-dlp"
+exit
+nbr-profile "no-nbr"
+exit
+epp-profile "no-epp"
+exit
+epp-profile "predef_epp"
+ status uninstall log-only
+ status unhealthy log-only
+ status infected block
+ status abnormal block
+exit
+no logging traffic session to buffer
+logging traffic nat on
+logging traffic nat to syslog custom-format 
+logging syslog 10.50.11.120 vrouter "trust-vr" udp 514 type traffic nat
+pki trust-domain "trust_domain_default"
+  keypair "Default-Key"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit      
+pki trust-domain "trust_domain_ssl_proxy"
+  keypair "Default-Key"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit
+pki trust-domain "trust_domain_ssl_proxy_2048"
+  keypair "Default-Key-2048"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit
+pki trust-domain "trust_domain_ssl_proxy_rsa_4096"
+  keypair "RSA-Key-4096"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit
+pki trust-domain "trust_domain_ssl_proxy_ecc_256"
+  keypair "ECC-Key-256"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit      
+pki trust-domain "trust_domain_ssl_proxy_ecc_384"
+  keypair "ECC-Key-384"
+  enrollment self
+  subject commonName "DCFW-1800"
+  subject organization "DC YunKe Networks Co.,Ltd"
+exit
+pki trust-domain "network_manager_ca"
+  enrollment terminal
+exit
+address "Any" predefined
+  ip 0.0.0.0/0
+exit
+address "IPv6-any" ipv6 predefined
+  ip ::/0
+exit
+address "private_network" predefined
+  ip 10.0.0.0/8
+  ip 172.16.0.0/12
+  ip 192.168.0.0/16
+exit
+zone "mgt"
+  vrouter "mgt-vr"
+exit
+zone "untrust"
+  type wan
+  ad icmp-flood
+  ad ip-spoofing
+  ad ip-sweep
+  ad land-attack
+  ad port-scan
+  ad syn-flood
+  ad tear-drop
+  ad winnuke
+  ad ping-of-death
+  ad udp-flood
+  ad ip-fragment
+  ad ip-option
+  ad ip-directed-broadcast
+exit
+zone "l2-untrust" l2
+  type wan
+exit
+hostname "FW-1"
+admin host any ssh
+admin host any https
+admin ipv6-host ::/0 ssh
+admin ipv6-host ::/0 https
+l2tp pool "AddressPool"
+  address 10.50.253.1 10.50.253.100
+exit
+tunnel l2tp "L2TP VPN"
+  pool "AddressPool"
+  interface ethernet0/3
+  local-name "lns"
+  aaa-server "local"
+exit
+strict-tunnel-check
+flow
+  icmp-unreachable-session-keep
+exit
+interface ethernet0/0
+  zone  "trust"
+  ip address 192.168.1.1 255.255.255.0
+  manage ssh
+  manage ping
+  manage snmp
+  manage https
+exit
+interface ethernet0/1
+  zone  "trust"
+  ip address 10.50.254.13 255.255.255.252
+  manage ping
+  ip ospf dead-interval 15
+  ip ospf hello-interval 5
+exit
+interface ethernet0/2
+  zone  "trust"
+  ip address 10.50.254.17 255.255.255.252
+  manage ping
+  ip ospf cost 100
+  ip ospf dead-interval 15
+  ip ospf hello-interval 5
+exit
+interface ethernet0/3
+  zone  "untrust"
+  ip address 202.50.100.6 255.255.255.252
+  manage ping
+exit
+interface loopback1
+  zone  "trust"
+  ip address 10.50.255.5 255.255.255.255
+  manage ping
+exit
+interface tunnel1
+  zone  "trust"
+  ip address 10.50.253.100 255.255.255.0
+  manage ping
+  tunnel l2tp "L2TP VPN"
+exit
+ip vrouter "trust-vr"
+  snatrule id 1 from address-book "Any" to address-book "Any" service "Any" trans-to ip 202.50.21.0/28 mode dynamicport s 
+  ip route 0.0.0.0/0 202.50.100.5
+  router ospf 1
+    router-id 10.50.255.5
+    default-information originate always type 1
+    network 10.50.255.5/32 area 0
+    network 10.50.254.12/30 area 0
+    network 10.50.254.16/30 area 0
+  exit
+exit
+qos-engine first
+  root-pipe "default" id 1
+    qos-mode "stat"
+  exit
+exit
+qos-engine second
+  disable
+  root-pipe "default" id 2
+    qos-mode "stat"
+  exit    
+exit
+rule id 2
+  action permit
+  src-zone "trust"
+  dst-zone "untrust"
+  src-ip 10.50.11.0/24
+  src-ip 10.50.21.0/24
+  src-ip 10.50.31.0/24
+  src-ip 172.16.200.0/24
+  src-ip 172.16.10.0/24
+  dst-ip 0.0.0.0/0
+  service "Any"
+exit
+rule id 1
+  action permit
+  src-addr "Any"
+  dst-addr "Any"
+  service "Any"
+exit
+aaa-server "local" type local
+  user "dcn2021001"
+    password "$010102z9$4MBvtl9K0Rx69fY/rA/T52uLRWc=" create-time "2026-1-21"
+  exit
+exit      
+password-policy
+  admin min-length 8
+  admin complexity enable
+  admin capital-letters 1
+  admin small-letters 1
+  admin numeric-characters 1
+  admin non-alphanumeric-letters 1
+  admin password-expiration 7
+  admin original-time 1768986914
+exit
+admin user "admin"
+  password pZ6v9pJKrLhM4nt7/XYidgrA+L
+  password-expiration 12345678
+  role "admin"
+  access console
+  access ssh
+  access https
+exit
+user-sso server ad-scripting default
+exit
+user-sso server sso-radius default
+exit
+user-sso server radius-snooping default
+exit      
+l2-nonip-action drop
+no tcp-mss all
+tcp-mss tunnel 1380
+ecmp-route-select by-src-and-dst
+url-db-query server1 "url1.dcnetworks.com.cn" port 8866 vrouter trust-vr
+url-db-query server2 "url2.dcnetworks.com.cn" port 8866 vrouter trust-vr
+sslproxy trust-domain "trust_domain_ssl_proxy_2048"
+no sms disable
+statistics-set "predef_if_bw"
+  target-data bandwidth id 0 record-history
+  group-by interface directional vsys
+exit
+statistics-set "predef_user_bw"
+  target-data bandwidth id 1 record-history
+  group-by user directional vr vsys
+exit
+statistics-set "predef_app_bw"
+  target-data bandwidth id 2 record-history
+  group-by application vsys
+exit
+statistics-set "predef_user_app_bw"
+  target-data bandwidth id 3
+  group-by user directional interface zone application vsys
+exit      
+statistics-set "predef_zone_if_app_bw"
+  target-data bandwidth id 4
+  group-by interface zone directional application vsys
+exit
+statistics-set "predef_protocol_bw"
+  target-data bandwidth id 5 record-history
+  group-by protocol vsys
+exit
+statistics-filter address "Any"
+statistics-filter ipv6-address "IPv6-any"
+
+End
+
