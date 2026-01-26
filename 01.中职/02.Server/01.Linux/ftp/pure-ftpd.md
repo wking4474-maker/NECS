@@ -4,7 +4,7 @@
 yum install gcc*
 
 #解压缩pure-ftpd源码包
-tar -zxvf /opt/pure-ßftpd-1.0.52.tar.gz
+tar -zxvf /opt/pure-ftpd-1.0.52.tar.gz
 cd /opt/pure-ftpd-1.0.52
 
 #编译源码包
