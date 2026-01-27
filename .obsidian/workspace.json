@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "3e224989d23c11a5",
+        "id": "c6fd79f2fd3cdff2",
         "type": "tabs",
         "children": [
           {
-            "id": "4d4a641987e368cc",
+            "id": "a0c196ed15758c31",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -180,8 +180,12 @@
       "github-sync:Sync with Remote": false
     }
   },
-  "active": "296625c60d8a9c93",
+  "active": "a0c196ed15758c31",
   "lastOpenFiles": [
+    "01.中职/02.Server/01.Linux/redis/redis集群搭建.md",
+    "01.中职/02.Server/01.Linux/redis/redis1.md",
+    "01.中职/02.Server/01.Linux/redis/redis2.md",
+    "01.中职/02.Server/01.Linux/database/postgresql/导出数据.md",
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-3.txt",
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-2.txt",
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/SW-1.txt",
@@ -192,7 +196,6 @@
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置/AC.txt",
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/网络配置",
     "01.中职/03.历年试卷网络配置/国赛/2021年国赛/untitled folder",
-    "01.中职/03.历年试卷网络配置/国赛/2021年国赛/2021年国赛正赛报告单/Server/Scripts-Win/Windows-7.ps1",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes_mul_master.md",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes(iscsi磁盘).md",
     "01.中职/02.Server/01.Linux/kubernetes/kubernetes.md",
@@ -216,9 +219,6 @@
     "01.中职/02.Server/01.Linux/nginx/ab压力测试.md",
     "01.中职/02.Server/01.Linux/nginx/Nginx高并发调优.md",
     "01.中职/02.Server/01.Linux/pcs_cluster/pcs_cluster.md",
-    "01.中职/02.Server/01.Linux/aggNic/team.md",
-    "01.中职/03.历年试卷网络配置/省赛/2023年/2023_江苏省赛问题分析/问题解析.md",
-    "中职/03.历年试卷网络配置/省赛/2023年省赛/2023_江苏省赛问题分析/问题解析.md",
-    "中职/03.历年试卷网络配置/2023年省赛/2023_江苏省赛问题分析/问题解析.md"
+    "01.中职/02.Server/01.Linux/aggNic/team.md"
   ]
 }
