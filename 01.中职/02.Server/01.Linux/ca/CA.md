@@ -1,4 +1,4 @@
-#### 创建CA
+d s#### 创建CA
 ```shell
 mkdir /etc/pki/CA
 mkdir /etc/pki/CA/private
