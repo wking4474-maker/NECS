@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01.中职/02.Server/01.Linux/ftp/pure-ftpd/02.pure-ftpd赛题解析.md",
+                "file": "01.中职/02.Server/01.Linux/CICD/jenkins/02.jenkins配置持续集成.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02.pure-ftpd赛题解析"
+              "title": "02.jenkins配置持续集成"
             }
           }
         ]
@@ -184,8 +184,11 @@
       "github-sync:Sync with Remote": false
     }
   },
-  "active": "3877a893f647350f",
+  "active": "296625c60d8a9c93",
   "lastOpenFiles": [
+    "01.中职/02.Server/01.Linux/CICD/jenkins/01.jenkins部署.md",
+    "01.中职/02.Server/01.Linux/CICD/gitlab/01.gitlab部署.md",
+    "01.中职/02.Server/01.Linux/ftp/pure-ftpd/02.pure-ftpd赛题解析.md",
     "01.中职/02.Server/04.AI/01.2026年江苏省赛AI部署/02.Dify+ollama 离线部署.md",
     "01.中职/02.Server/04.AI/01.2026年江苏省赛AI部署/03.Dify离线安装插件教程.md",
     "01.中职/02.Server/04.AI/01.2026年江苏省赛AI部署/04.用户提示词.md",
@@ -203,15 +206,12 @@
     "01.中职/02.Server/01.Linux/CICD/pics/g5.png",
     "01.中职/02.Server/01.Linux/CICD/pics/g4.png",
     "01.中职/02.Server/01.Linux/CICD/pics/g3.png",
-    "01.中职/02.Server/01.Linux/CICD/jenkins/01.jenkins部署.md",
-    "01.中职/02.Server/01.Linux/CICD/gitlab/01.gitlab部署.md",
     "01.中职/02.Server/01.Linux/CICD/pics/g1.png",
     "01.中职/02.Server/01.Linux/CICD/pics/g2.png",
     "01.中职/02.Server/01.Linux/CICD/pics/j1.png",
     "01.中职/02.Server/01.Linux/CICD/gitlab",
     "01.中职/02.Server/01.Linux/CICD/pics",
     "01.中职/02.Server/01.Linux/CICD/jenkins",
-    "01.中职/02.Server/01.Linux/ftp/pure-ftpd/02.pure-ftpd赛题解析.md",
     "01.中职/02.Server/01.Linux/CICD",
     "01.中职/02.Server/01.Linux/ftp/pure-ftpd/01.pure-ftpd部署.md",
     "01.中职/02.Server/01.Linux/ftp/pure-ftpd",
